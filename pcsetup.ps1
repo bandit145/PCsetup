@@ -12,7 +12,7 @@ if(Test-Path c:\windows\system32\gwx){
 	Stop-Process -processname gwx
 	$Acl = Get-Acl "c:\windows\system32\gwx"
 	#not entirely sure if I need this stuff
-	#$addUsr = New-Object system.security.accesscontrol.filesystemaccessrule("pylon","FullControl","ContainerInherit, ObjectInherit","Allow")
+	#$addUsr = New-Object system.security.accesscontrol.filesystemaccessrule("User name","FullControl","ContainerInherit, ObjectInherit","Allow")
 	takeown /F "c:\windows\system32\gwx" /R /D Y
 	#needs testing
 	$rmTrusted = New-Object system.security.accesscontrol.filesystemaccessrule("TrustedInstaller","Read","Allow")
@@ -45,7 +45,7 @@ if(Test-Path c:\programdata\chocolatey){
 }
 else{
 	"Installing Chocolatey..."
-    #replace with choclatey install script (this is a security risk)
+    #replace with choclatey install script (this is currently a security risk)
 	iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))
 	"Installing programs..."
 	foreach($choco in $apps){

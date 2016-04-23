@@ -1,0 +1,6 @@
+open 10.1.10.161
+user
+tech
+get pcsetup.ps1 \desktop
+get PSWindowsUpdate \desktop
+quit
