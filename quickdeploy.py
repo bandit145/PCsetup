@@ -20,7 +20,7 @@ class Class01:
 	
 	def ftpverify(self,dl,directory): #verifies download and runs app/scripts
 		count = 0
-		while count <= len(dl):
+		while count <= (len(dl) -1):
 			size = self.ftp.size(dl[count])
 			self.ftp.retrbinary('RETR ' + dl[count], open(dl[count], 'wb').write)
 			if os.path.exists(directory+'\\' +dl[count]):
