@@ -27,7 +27,7 @@ class Class01:
 				while os.path.getsize(directory+'\\'+dl[count]) != size: #checks to make sure file size is correct, if it is not correct this would indicate a a bad download
 					continue
 					
-				sp.Popen(['powershell.exe'],''+directory+'\\'+dl[count],1) #figure out bufsize
+				sp.Popen([r'C:\WINDOWS\system32\WindowsPowerShell\v1.0\powershell.exe','-ExecutionPolicy','Unrestricted',''+directory+'\\'+dl[count]]) #works now
 					
 			else:
 				print('Download did not start')
@@ -36,7 +36,7 @@ class Class01:
 	#keep track of data in list
 	def listcheck(self,UserAns,directory,scripts):
 		if UserAns.lower() == 'new user':
-			dl = [scripts[0],scripts[1]]
+			dl = [scripts[0]]
 			self.ftpverify(dl,directory)
 			
 		
