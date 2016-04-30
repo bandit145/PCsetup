@@ -12,7 +12,7 @@ import subprocess as sp
 class Class01:
 	def __init__(self):
 		#try:
-		self.ftp = FTP('192.168.1.9')
+		self.ftp = FTP('10.1.10.161')
 		self.ftp.login('tech')
 		self.user = getpass.getuser()
 		#except:
@@ -44,8 +44,11 @@ class Class01:
 	def check(self,UserAns,scripts,directory):
 		if UserAns.lower() == 'new user':
 			self.NewUsr(scripts,directory,UserAns)
-		elif UserAns.lower() == 'exit' or 'quit':
+		elif UserAns.lower() == 'exit' or UserAns.lower()=='quit':
 			sys.exit()
+		else:
+			print('Unrecognized input, try help')
+			self.main()
 	#Begins program
 	def main(self):
 		directory = 'C:\\Users\\'+self.user+'\\desktop'
