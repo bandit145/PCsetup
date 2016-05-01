@@ -6,7 +6,6 @@
 
 $apps = @("unchecky","googlechrome","flashplayerplugin","adobereader","adobeshockwaveplayer","7zip","silverlight","jre8")
 $updates = @("3035583","2976978")
-Import-Module PSWindowsUpdate
 if(Test-Path c:\windows\system32\gwx){
 	"Removing GWX..."
 	Stop-Process -processname gwx
@@ -27,13 +26,6 @@ if(Test-Path c:\windows\system32\gwx){
 	wusa /uninstall /kb:$update /quiet /norestart
 	}
 	
-	#Possible: Turn off windows update, install choclatey, and grab our usual set of programs
-	"Hiding Updates..."
-	foreach($update in $updates){
-		#need to get pswindwosupdate module
-		Hide-WUUpdate -KB $update
-	}
-	"Turning off Windows update..."
 
 }
 "Checking for Chocolatey..."
