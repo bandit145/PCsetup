@@ -1,0 +1,6 @@
+QuickDeploy is a quick little utility for deploying scripts to a machine that you have physical access to.
+
+
+Type "list" to see available packages for download.
+
+When you find the package you wish to download just type it in exactly as it is listed, minus the quotes and bracket.
