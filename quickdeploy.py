@@ -11,14 +11,17 @@ import os
 from ftplib import FTP
 import subprocess as sp
 from iniclass import INI
+import logging
+import datetime
 class Class01:
 	def __init__(self):
-		#try:
-		self.ini = INI()
-		self.ftp = FTP('10.1.10.161')
-		self.user = getpass.getuser()
-		#except:
-		#print('Could not connect to FTP server')
+		try:
+			self.ini = INI()
+			self.ftp = FTP('10.1.10.161')
+			self.user = getpass.getuser()
+		except FTP.all_errors:
+			print('Could not connect to FTP server')
+			sys.exit()
 	
 	def ftpverifyPS(self,scripts,directory): #verifies download and runs app/scripts that are Powershell
 		self.ftp.login('tech')
@@ -61,7 +64,7 @@ class Class01:
 			print(f.read())
 			self.main()
 		else:
-			print('Unrecognized input, try list')
+			print('Unrecognized input, try "help"')
 			self.main()
 			
 	#Begins program
@@ -71,9 +74,17 @@ class Class01:
 		directory = 'C:\\Users\\'+self.user+'\\desktop'
 		UserAns =input("Hello, what do you need? > ")
 		self.check(UserAns,directory,sections)
-		
+	
 if __name__ == '__main__':
-	quick = Class01()
-	quick.main()
+	logging.basicConfig(filename='log.txt',level=logging.ERROR)
+	try:
+		quick = Class01()
+		quick.main()
+	except:
+		currentTime =datetime.datetime.now()
+		logging.exception('Error at '+ str(currentTime))
+		print('There was an error, please provide your programmer with the "log.txt" file')
+		print('Exiting...')
+		sys.exit()
 		
 		

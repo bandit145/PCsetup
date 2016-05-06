@@ -1,0 +1,15 @@
+
+ERROR:root:Error at 2016-05-06 11:04:21.352531
+Traceback (most recent call last):
+  File "quickdeploy.py", line 82, in <module>
+    equick.main()
+NameError: name 'equick' is not defined
+ERROR:root:Error at 2016-05-06 11:05:02.383718
+Traceback (most recent call last):
+  File "quickdeploy.py", line 82, in <module>
+    quick.main()
+  File "quickdeploy.py", line 76, in main
+    self.check(UserAns,directory,sections)
+  File "quickdeploy.py", line 58, in check
+    dprint('Available packages: '+str(sections))
+NameError: name 'dprint' is not defined
