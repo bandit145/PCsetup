@@ -1,90 +1,57 @@
-#CHANGE FTP VERIFY TO MORE MODULAR THING, THE PWRSHELL SCRIPT NEEDS DPENEDNCIES BUT IT DOESNT NEED TO BE RUN
-	#PROBABLY A FOR LOOP FOR LENGTH OF NEW LIST THAT I WILL CREATE
-	#
-	#
-#TODO ADD ERROR HANDLING FOR FTP/EVERYTHING! 
-#TODO EVERY TIME DOWNLAOD STARTS INITATE FTP SESSION SO TIMEOUT DOES NOT OCCUR
-import configparser
 import sys
-import getpass
-import os
-from ftplib import FTP
-import subprocess as sp
 from iniclass import INI
+from ftpclass import FTPclass
+import getpass
 import logging
 import datetime
-class Class01:
-	def __init__(self):
-		try:
-			self.ini = INI()
-			self.ftp = FTP('10.1.10.161')
-			self.user = getpass.getuser()
-		except FTP.all_errors:
-			print('Could not connect to FTP server')
-			sys.exit()
-	
-	def ftpverifyPS(self,scripts,directory): #verifies download and runs app/scripts that are Powershell
-		self.ftp.login('tech')
-		os.chdir(directory)
-		count =0
-		access = 0
-		for v in scripts.values(): #iterates through number of dependencies needed
-			access = access+1
-			value =scripts[str(access)] #dls them based of of order in ini file
-			size = self.ftp.size(value)
-			self.ftp.retrbinary('RETR ' + value, open(value, 'wb').write)
-			if os.path.exists(directory+'\\' +value):
-				while os.path.getsize(directory+'\\'+value) != size: #checks to make sure file size is correct, if it is not correct this would indicate a bad download
-					continue
-					
-				sp.Popen([r'C:\WINDOWS\system32\WindowsPowerShell\v1.0\powershell.exe','-ExecutionPolicy','Unrestricted',''+directory+'\\'+value]) #works now
-				while os.path.exists('done.txt') != True:
-					continue
-			else:
-				print('Download did not start for '+ value)
-				self.main()
-			count = count+1
-	#keep track of data in list
-		
-	def check(self,UserAns,directory,sections):
-		if UserAns in sections:
-			package = UserAns#package of scripts
-			scripts = self.ini.Package(package)
-			scripts = dict(scripts)
-			print(scripts)
-			self.ftpverifyPS(scripts,directory)
-			
-		elif UserAns.lower() == 'list':
-			print('Available packages: '+str(sections))
-			self.main()
-		elif UserAns.lower() == 'exit':
-			sys.exit()
-		elif UserAns.lower() == 'help':
-			f = open("help.txt")
-			print(f.read())
-			self.main()
-		else:
-			print('Unrecognized input, try "help"')
-			self.main()
-			
-	#Begins program
-	def main(self):
-		sections = self.ini.CollectScripts()
-		sections = sections
-		directory = 'C:\\Users\\'+self.user+'\\desktop'
-		UserAns =input("Hello, what do you need? > ")
-		self.check(UserAns,directory,sections)
-	
+import ftplib
+import os
+
+#TODO set up FTP_TLS support for external network use
+def main():
+    ini = INI()
+    sections = ini.CollectScripts()
+    sections = sections
+    directory = 'C:\\Users\\' + getpass.getuser() + '\\desktop'
+    UserAns = input("Hello, what do you need? > ")
+    check(UserAns, directory, sections,ini)
+
+
+def check(UserAns, directory, sections,ini):
+    if UserAns in sections:
+        ftp = FTPclass()
+        package = UserAns  # package of scripts
+        scripts = ini.Package(package)
+        scripts = dict(scripts) #passes it to dict to be searched easier
+        ftp.DLWS(scripts, directory)
+        main()
+
+    elif UserAns.lower() == 'list':
+        print('Available packages: ' + str(sections))
+        main()
+    elif UserAns.lower() == 'exit':
+        sys.exit()
+    elif UserAns.lower() == 'help':
+        f = open("help.txt")
+        print(f.read())
+        main()
+    else:
+        print('Unrecognized input, try "help"')
+        main()
+
 if __name__ == '__main__':
-	logging.basicConfig(filename='log.txt',level=logging.ERROR)
-	try:
-		quick = Class01()
-		quick.main()
-	except:
-		currentTime =datetime.datetime.now()
-		logging.exception('Error at '+ str(currentTime))
-		print('There was an error, please provide your programmer with the "log.txt" file')
-		print('Exiting...')
-		sys.exit()
-		
-		
+    logging.basicConfig(filename='log.txt', level=logging.ERROR)
+    try:
+        main()
+    except ftplib.all_errors :
+        currentTime = datetime.datetime.now()
+        logging.exception('Error at ' + str(currentTime))
+        print('There was an FTP related error, most likely the ip address of the server is wrong. Please check that in "conifg.ini"')
+        print('Exiting...')
+        sys.exit()
+    except os.error:
+        currentTime = datetime.datetime.now()
+        logging.exception('Error at ' + str(currentTime))
+        print('There was a file related error')
+        print('Exiting...')
+        sys.exit()

@@ -1,15 +1,40 @@
-
-ERROR:root:Error at 2016-05-06 11:04:21.352531
+ERROR:root:Error at 2016-05-14 16:42:09.170174
 Traceback (most recent call last):
-  File "quickdeploy.py", line 82, in <module>
-    equick.main()
-NameError: name 'equick' is not defined
-ERROR:root:Error at 2016-05-06 11:05:02.383718
+  File "quickdeployv2.py", line 43, in <module>
+    main()
+  File "quickdeployv2.py", line 15, in main
+    check(UserAns, directory, sections,ini)
+  File "quickdeployv2.py", line 25, in check
+    main()
+  File "quickdeployv2.py", line 15, in main
+    check(UserAns, directory, sections,ini)
+  File "quickdeployv2.py", line 31, in check
+    sys.exit()
+SystemExit
+ERROR:root:Error at 2016-05-14 16:44:27.546363
 Traceback (most recent call last):
-  File "quickdeploy.py", line 82, in <module>
-    quick.main()
-  File "quickdeploy.py", line 76, in main
-    self.check(UserAns,directory,sections)
-  File "quickdeploy.py", line 58, in check
-    dprint('Available packages: '+str(sections))
-NameError: name 'dprint' is not defined
+  File "quickdeployv2.py", line 43, in <module>
+    main()
+  File "quickdeployv2.py", line 15, in main
+    check(UserAns, directory, sections,ini)
+  File "quickdeployv2.py", line 31, in check
+    sys.exit(1)
+SystemExit: 1
+ERROR:root:Error at 2016-05-14 16:44:38.562849
+Traceback (most recent call last):
+  File "quickdeployv2.py", line 43, in <module>
+    main()
+  File "quickdeployv2.py", line 15, in main
+    check(UserAns, directory, sections,ini)
+  File "quickdeployv2.py", line 31, in check
+    sys.exit(0)
+SystemExit: 0
+ERROR:root:Error at 2016-05-14 16:45:26.211622
+Traceback (most recent call last):
+  File "quickdeployv2.py", line 43, in <module>
+    main()
+  File "quickdeployv2.py", line 15, in main
+    check(UserAns, directory, sections,ini)
+  File "quickdeployv2.py", line 31, in check
+    sys.exit(1)
+SystemExit: 1
