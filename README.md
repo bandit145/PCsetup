@@ -4,6 +4,7 @@ A little script to help setup pcs at my office.
 PCsetup is a program that is intended for desktop support techs to assist with configuring computers.
 
 Program structure:
+
   quickdeploy.py is the executable
   
   iniclass.py contains the ini methods
