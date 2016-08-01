@@ -1,3 +1,4 @@
+<img>https://travis-ci.org/bandit145/PCsetup.svg?branch=master</img>
 # PCsetup
 A little script to help setup pcs at my office.
 
