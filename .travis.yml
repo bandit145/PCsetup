@@ -8,5 +8,5 @@ python:
 
 script: 
  - python quickdeploy.py
- - echo "exit"
+ - exit
 
