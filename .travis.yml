@@ -6,9 +6,7 @@ python:
 - "3.5"
 
 
-script: python quickdeploy.py
-- help
-- list
-- aegwgw
-- exit
+script: 
+ - python quickdeploy.py
+ - echo "exit"
 
