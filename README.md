@@ -1,4 +1,4 @@
-<img>https://travis-ci.org/bandit145/PCsetup.svg?branch=master</img>
+[![Build Status](https://travis-ci.org/bandit145/PCsetup.svg?branch=master)](https://travis-ci.org/bandit145/PCsetup)
 # PCsetup
 A little script to help setup pcs at my office.
 
