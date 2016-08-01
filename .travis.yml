@@ -6,4 +6,5 @@ python:
 - "3.5"
 
 
-script: python quickdeploy.py
+script: make test
+
